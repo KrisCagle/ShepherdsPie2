@@ -63,7 +63,7 @@ builder.Services.AddIdentityCore<IdentityUser>(config =>
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // allows our api endpoints to access the database through Entity Framework Core
-builder.Services.AddNpgsql<ShepherdsPiesDbContext>(builder.Configuration["HouseRulesDbConnectionString"]);
+builder.Services.AddNpgsql<ShepherdsPiesDbContext>(builder.Configuration["ShepherdsPiesDbConnectionString"]);
 
 
 var app = builder.Build();

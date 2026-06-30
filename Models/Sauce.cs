@@ -1,3 +1,5 @@
+namespace ShepherdsPies.Models;
+
 public class Sauce
 {
     public int Id {get; set; }
