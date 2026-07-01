@@ -125,3 +125,6 @@ C:\Users\Krisc\workspace\csharp\ShepherdsPies\obj\Debug\net10.0\refint\Shepherds
 C:\Users\Krisc\workspace\csharp\ShepherdsPies\obj\Debug\net10.0\ShepherdsPies.pdb
 C:\Users\Krisc\workspace\csharp\ShepherdsPies\obj\Debug\net10.0\ShepherdsPies.genruntimeconfig.cache
 C:\Users\Krisc\workspace\csharp\ShepherdsPies\obj\Debug\net10.0\ref\ShepherdsPies.dll
+C:\Users\Krisc\workspace\csharp\ShepherdsPies\bin\Debug\net10.0\client\.oxlintrc.json
+C:\Users\Krisc\workspace\csharp\ShepherdsPies\bin\Debug\net10.0\client\package-lock.json
+C:\Users\Krisc\workspace\csharp\ShepherdsPies\bin\Debug\net10.0\client\package.json
