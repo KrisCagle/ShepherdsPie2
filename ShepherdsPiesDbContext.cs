@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ShepherdsPies.Models;
 
 namespace ShepherdsPies.Data
 {
-    public class ShepherdsPiesDbContext : DbContext
+    public class ShepherdsPiesDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
     {
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Order> Orders { get; set; }
@@ -20,7 +22,8 @@ namespace ShepherdsPies.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Order -> Employee (two FKs to the same table, must configure explicitly)
+            base.OnModelCreating(modelBuilder); // required for Identity tables to be configured
+
             modelBuilder.Entity<Order>()
                 .HasOne(o => o.OrderTakenBy)
                 .WithMany()
@@ -33,7 +36,6 @@ namespace ShepherdsPies.Data
                 .HasForeignKey(o => o.DeliveryEmployeeId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Pizza -> Order, Cheese, Sauce, Size
             modelBuilder.Entity<Pizza>()
                 .HasOne(p => p.Order)
                 .WithMany(o => o.Pizzas)
@@ -54,7 +56,6 @@ namespace ShepherdsPies.Data
                 .WithMany()
                 .HasForeignKey(p => p.SizeId);
 
-            // PizzaTopping -> Pizza, Topping (the many-to-many join table)
             modelBuilder.Entity<PizzaTopping>()
                 .HasOne(pt => pt.Pizza)
                 .WithMany(p => p.PizzaToppings)
@@ -64,8 +65,6 @@ namespace ShepherdsPies.Data
                 .HasOne(pt => pt.Topping)
                 .WithMany()
                 .HasForeignKey(pt => pt.ToppingId);
-
-            // Seed data goes here later (Sizes, Cheeses, Sauces, Toppings from the menu)
         }
     }
 }
