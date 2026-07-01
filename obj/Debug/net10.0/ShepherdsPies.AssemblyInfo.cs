@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ShepherdsPies")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7f6661a340c8a333635f9786d6f3f668ec5b7c15")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d997630841a6fdb25ef595109b1c7d798d58a1b6")]
 [assembly: System.Reflection.AssemblyProductAttribute("ShepherdsPies")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ShepherdsPies")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
