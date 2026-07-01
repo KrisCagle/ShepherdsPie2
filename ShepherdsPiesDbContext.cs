@@ -65,6 +65,46 @@ namespace ShepherdsPies.Data
                 .HasOne(pt => pt.Topping)
                 .WithMany()
                 .HasForeignKey(pt => pt.ToppingId);
+            
+            modelBuilder.Entity<Employee>()
+                .HasOne(e => e.IdentityUser)
+                .WithMany()
+                .HasForeignKey(e => e.IdentityUserId);
+    
+        modelBuilder.Entity<Size>().HasData(
+    new Size { SizeId = 1, Name = "Small (10\")", Price = 10.00m },
+    new Size { SizeId = 2, Name = "Medium (14\")", Price = 12.00m },
+    new Size { SizeId = 3, Name = "Large (18\")", Price = 15.00m }
+);
+
+modelBuilder.Entity<Cheese>().HasData(
+    new Cheese { CheeseId = 1, Name = "Buffalo Mozzarella" },
+    new Cheese { CheeseId = 2, Name = "Four Cheese" },
+    new Cheese { CheeseId = 3, Name = "Vegan" },
+    new Cheese { CheeseId = 4, Name = "None" }
+);
+
+modelBuilder.Entity<Sauce>().HasData(
+    new Sauce { SauceId = 1, Name = "Marinara" },
+    new Sauce { SauceId = 2, Name = "Arrabbiata" },
+    new Sauce { SauceId = 3, Name = "Garlic White" },
+    new Sauce { SauceId = 4, Name = "None" }
+);
+
+modelBuilder.Entity<Topping>().HasData(
+    new Topping { ToppingId = 1, Name = "Sausage", Price = 0.50m },
+    new Topping { ToppingId = 2, Name = "Pepperoni", Price = 0.50m },
+    new Topping { ToppingId = 3, Name = "Mushroom", Price = 0.50m },
+    new Topping { ToppingId = 4, Name = "Onion", Price = 0.50m },
+    new Topping { ToppingId = 5, Name = "Green Pepper", Price = 0.50m },
+    new Topping { ToppingId = 6, Name = "Black Olive", Price = 0.50m },
+    new Topping { ToppingId = 7, Name = "Basil", Price = 0.50m },
+    new Topping { ToppingId = 8, Name = "Extra Cheese", Price = 0.50m }
+);
+    
         }
+        
     }
+
+
 }

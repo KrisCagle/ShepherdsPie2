@@ -2,6 +2,6 @@ namespace ShepherdsPies.Models;
 
 public class Sauce
 {
-    public int Id {get; set; }
+    public int SauceId {get; set; }
     public string Name {get; set; }
 }

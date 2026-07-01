@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ShepherdsPies.Data;
@@ -11,9 +12,11 @@ using ShepherdsPies.Data;
 namespace ShepherdsPies.Migrations
 {
     [DbContext(typeof(ShepherdsPiesDbContext))]
-    partial class ShepherdsPiesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260701155048_RenameCheeseAndSauceKeysAndSeedMenu")]
+    partial class RenameCheeseAndSauceKeysAndSeedMenu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -269,17 +272,11 @@ namespace ShepherdsPies.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("IdentityUserId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("EmployeeId");
-
-                    b.HasIndex("IdentityUserId");
 
                     b.ToTable("Employees");
                 });
@@ -570,17 +567,6 @@ namespace ShepherdsPies.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ShepherdsPies.Models.Employee", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("IdentityUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("IdentityUser");
                 });
 
             modelBuilder.Entity("ShepherdsPies.Models.Order", b =>
