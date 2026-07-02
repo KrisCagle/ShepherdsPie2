@@ -4,6 +4,8 @@ import { getLoggedInEmployee } from "./managers/AuthManager"
 import Login from "./components/auth/Login"
 import Register from "./components/auth/Register"
 import OrderList from "./components/orders/OrderList"
+import OrderDetails from "./components/orders/OrderDetails"
+import NewOrder from "./components/orders/NewOrder"
 
 export default function App() {
   const [loggedInEmployee, setLoggedInEmployee] = useState(undefined)
@@ -39,6 +41,26 @@ export default function App() {
   )
 }
       />
+      <Route
+  path="/orders/:orderId"
+  element={
+    loggedInEmployee ? (
+      <OrderDetails />
+    ) : (
+      <Login setLoggedInEmployee={setLoggedInEmployee} />
+    )
+  }
+/>
+<Route
+  path="/orders/new"
+  element={
+    loggedInEmployee ? (
+      <NewOrder />
+    ) : (
+      <Login setLoggedInEmployee={setLoggedInEmployee} />
+    )
+  }
+/>
     </Routes>
   )
 }
