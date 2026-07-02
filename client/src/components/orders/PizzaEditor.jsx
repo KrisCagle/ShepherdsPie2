@@ -32,8 +32,7 @@ export default function PizzaEditor({ pizza, sizes, cheeses, sauces, toppings, o
 
   return (
     <div>
-      <h4>Edit pizza</h4>
-      <form onSubmit={handleSave}>
+      <form className="inline-form" onSubmit={handleSave}>
         <select value={sizeId} onChange={(e) => setSizeId(e.target.value)}>
           {sizes.map((size) => (
             <option key={size.sizeId} value={size.sizeId}>
@@ -59,20 +58,21 @@ export default function PizzaEditor({ pizza, sizes, cheeses, sauces, toppings, o
         </select>
 
         <button type="submit">Save</button>
-        <button type="button" onClick={onClose}>Cancel</button>
       </form>
 
-      <h5>Toppings (${TOPPING_PRICE.toFixed(2)} each)</h5>
-      {toppings.map((topping) => (
-        <label key={topping.toppingId} style={{ display: "block" }}>
-          <input
-            type="checkbox"
-            checked={currentToppingIds.includes(topping.toppingId)}
-            onChange={(e) => handleToggleTopping(topping.toppingId, e.target.checked)}
-          />
-          {topping.name}
-        </label>
-      ))}
+      <h4>Toppings (${TOPPING_PRICE.toFixed(2)} each)</h4>
+      <div className="topping-grid">
+        {toppings.map((topping) => (
+          <label key={topping.toppingId}>
+            <input
+              type="checkbox"
+              checked={currentToppingIds.includes(topping.toppingId)}
+              onChange={(e) => handleToggleTopping(topping.toppingId, e.target.checked)}
+            />
+            {topping.name}
+          </label>
+        ))}
+      </div>
     </div>
   )
 }

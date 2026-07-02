@@ -23,33 +23,35 @@ export default function Login({ setLoggedInEmployee }) {
   }
 
   return (
-    <div>
-      <h1>Log in</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            type="text"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </div>
-        {error && <p>{error}</p>}
-        <button type="submit">Log in</button>
-      </form>
-      <p>
-        Don't have an account? <a href="/register">Register here</a>
-      </p>
+    <div className="page">
+      <div className="auth-card">
+        <h1>Shepherd's Pies</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              id="username"
+              type="text"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </div>
+          {error && <p className="error-text">{error}</p>}
+          <button type="submit">Log in</button>
+        </form>
+        <p>
+          Don't have an account? <a href="/register">Register here</a>
+        </p>
+      </div>
     </div>
   )
 }

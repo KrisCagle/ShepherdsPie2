@@ -37,7 +37,7 @@ export default function OrderDetails() {
   }, [orderId])
 
   if (!order) {
-    return <p>Loading...</p>
+    return <div className="page"><p>Loading...</p></div>
   }
 
   const calculatePizzaCost = (pizza) => {
@@ -85,44 +85,66 @@ export default function OrderDetails() {
   }
 
   return (
-    <div>
+    <div className="page">
+      <span className="eyebrow" style={{fontFamily: "var(--font-mono)", fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--tomato)"}}>
+        Order #{order.orderId}
+      </span>
       <h1>
         {order.tableNumber ? `Table ${order.tableNumber}` : "Delivery"}
+        {isDelivery && <span className="badge" style={{marginLeft: "0.6rem"}}>Delivery</span>}
       </h1>
       <p>Order taken by: {order.orderTakenBy?.firstName} {order.orderTakenBy?.lastName}</p>
       <p>Placed: {new Date(order.orderDate).toLocaleString()}</p>
       <p>Tip: {order.tipAmount != null ? `$${order.tipAmount.toFixed(2)}` : "None recorded"}</p>
 
       <h2>Pizzas</h2>
-      <ul>
+      {order.pizzas?.length === 0 && <p>No pizzas on this order yet.</p>}
+      <ul className="pizza-list">
         {order.pizzas?.map((pizza) => (
-          <li key={pizza.pizzaId}>
-            {pizza.size?.name}, {pizza.cheese?.name}, {pizza.sauce?.name}
-            {pizza.pizzaToppings?.length > 0 && (
-              <> — {pizza.pizzaToppings.map((pt) => pt.topping?.name).join(", ")}</>
-            )}
-            {" "}— ${calculatePizzaCost(pizza).toFixed(2)}
-            {" "}
-            <button onClick={() => setEditingPizzaId(pizza.pizzaId)}>Edit</button>
-            <button onClick={() => handleRemovePizza(pizza.pizzaId)}>Remove</button>
+          <li key={pizza.pizzaId} className="pizza-row">
+            <div className="pizza-row-top">
+              <div>
+                {pizza.size?.name}, {pizza.cheese?.name}, {pizza.sauce?.name}
+                {pizza.pizzaToppings?.length > 0 && (
+                  <div className="ticket-meta">
+                    {pizza.pizzaToppings.map((pt) => pt.topping?.name).join(", ")}
+                  </div>
+                )}
+              </div>
+              <span className="price">${calculatePizzaCost(pizza).toFixed(2)}</span>
+            </div>
+            <div className="pizza-actions">
+              <button
+                type="button"
+                className="secondary"
+                onClick={() => setEditingPizzaId(editingPizzaId === pizza.pizzaId ? null : pizza.pizzaId)}
+              >
+                {editingPizzaId === pizza.pizzaId ? "Close" : "Edit"}
+              </button>
+              <button type="button" className="danger" onClick={() => handleRemovePizza(pizza.pizzaId)}>
+                Remove
+              </button>
+            </div>
 
             {editingPizzaId === pizza.pizzaId && (
-              <PizzaEditor
-                pizza={pizza}
-                sizes={sizes}
-                cheeses={cheeses}
-                sauces={sauces}
-                toppings={toppings}
-                onChange={loadOrder}
-                onClose={() => setEditingPizzaId(null)}
-              />
+              <div className="editor-panel">
+                <PizzaEditor
+                  pizza={pizza}
+                  sizes={sizes}
+                  cheeses={cheeses}
+                  sauces={sauces}
+                  toppings={toppings}
+                  onChange={loadOrder}
+                  onClose={() => setEditingPizzaId(null)}
+                />
+              </div>
             )}
           </li>
         ))}
       </ul>
 
       <h3>Add a pizza</h3>
-      <form onSubmit={handleAddPizza}>
+      <form className="inline-form" onSubmit={handleAddPizza}>
         <select
           value={newPizza.sizeId}
           onChange={(e) => setNewPizza({ ...newPizza, sizeId: e.target.value })}
@@ -162,13 +184,13 @@ export default function OrderDetails() {
         <button type="submit">Add pizza</button>
       </form>
 
-      <p>
-        <strong>Total: ${totalCost.toFixed(2)}</strong>
-        {isDelivery && " (includes $5.00 delivery surcharge)"}
-      </p>
+      <div className="total-line">
+        Total: ${totalCost.toFixed(2)}
+        {isDelivery && " (incl. $5.00 delivery)"}
+      </div>
 
       {!isDelivery && (
-        <div>
+        <div className="delivery-box">
           <label htmlFor="deliveryEmployee">Assign delivery employee</label>
           <select
             id="deliveryEmployee"
@@ -182,7 +204,9 @@ export default function OrderDetails() {
               </option>
             ))}
           </select>
-          <button onClick={handleAssignDelivery}>Assign</button>
+          <button type="button" className="secondary" onClick={handleAssignDelivery}>
+            Assign
+          </button>
         </div>
       )}
 
@@ -192,7 +216,9 @@ export default function OrderDetails() {
         </p>
       )}
 
-      <button onClick={handleCancel}>Cancel order</button>
+      <button type="button" className="danger" onClick={handleCancel}>
+        Cancel order
+      </button>
     </div>
   )
 }

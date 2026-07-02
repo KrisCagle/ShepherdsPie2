@@ -19,23 +19,25 @@ export default function NewOrder() {
   }
 
   return (
-    <div>
-      <h1>New order</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="tableNumber">
-            Table number (leave blank for delivery)
-          </label>
-          <input
-            id="tableNumber"
-            type="number"
-            min="1"
-            value={tableNumber}
-            onChange={(event) => setTableNumber(event.target.value)}
-          />
-        </div>
-        <button type="submit">Create order</button>
-      </form>
+    <div className="page">
+      <div className="auth-card">
+        <h1>New order</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="tableNumber">
+              Table number (leave blank for delivery)
+            </label>
+            <input
+              id="tableNumber"
+              type="number"
+              min="1"
+              value={tableNumber}
+              onChange={(event) => setTableNumber(event.target.value)}
+            />
+          </div>
+          <button type="submit">Create order</button>
+        </form>
+      </div>
     </div>
   )
 }
